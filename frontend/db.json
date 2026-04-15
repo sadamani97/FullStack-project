@@ -1,0 +1,53 @@
+{
+  "users": [
+    {
+      "name": "sadamani",
+      "email": "sadamanism97@gmail.com",
+      "password": "sadamani97",
+      "id": "4Xqgs93V2GM"
+    },
+    {
+      "name": "sadamani",
+      "email": "sadamanism97@gmail.com",
+      "password": "sadamani97",
+      "id": "-rA6zZhZtsU"
+    },
+    {
+      "name": "sadamani",
+      "email": "sadamanism97@gmail.com",
+      "password": "sadamani97",
+      "id": "JbU_q8daKyc"
+    },
+    {
+      "name": "sadamani",
+      "email": "sadamanism97@gmail.com",
+      "password": "sadamani97",
+      "id": "PTDqBrebpNQ"
+    },
+    {
+      "name": "mani",
+      "email": "manisada@gmail.com",
+      "password": "manisada",
+      "id": "afQd3F2fKd0"
+    },
+    {
+      "Name": "sadamani",
+      "Email": "sadamanism97@gmail.com",
+      "Password": "sadamani97",
+      "id": "qV8tORynTt0"
+    },
+    {
+      "name": "sadamanism ",
+      "email": "sadsm97@gmail.com",
+      "password": "sadasm97",
+      "id": "fD1KBdzcjrU"
+    },
+    {
+      "name": "sadamani",
+      "email": "sadamanism97@gmail.com",
+      "password": "sadamani97",
+      "id": "BhF06uRIBQs"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

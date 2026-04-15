@@ -1,0 +1,84 @@
+[
+    {
+        "id":1,
+        "name":"Germany",
+        "code":"DE",
+        "population":83783942,
+        "flag":"https://flagcdn.com/w320/de.png",
+        "region":"Europe",
+        "capital":"Berlin"
+    },
+    {
+        "id":2,
+        "name":"United States of America",
+        "code":"US",
+        "population":331002651,
+        "flag":"https://flagcdn.com/w320/us.png",
+        "region":"Americas",
+        "capital":"Washington, D.C."
+    },
+     {
+        "id":3,
+        "name":"Brazil",
+        "code":"BR",
+        "population":212559417,
+        "flag":"https://flagcdn.com/w320/br.png",
+        "region":"Americas",
+        "capital":"Brasília"
+    },
+     {
+        "id":4,
+        "name":"Iceland",
+        "code":"IS",
+        "population":341075,
+        "flag":"https://flagcdn.com/w320/is.png",
+        "region":"Europe",
+        "capital":"Reykjavik"
+    },
+     {
+        "id":5,
+        "name":"afghanistan",
+        "code":"AF",
+        "population":38928346,
+        "flag":"https://flagcdn.com/w320/af.png",
+        "region":"Asia",
+        "capital":"Kabul"
+    },
+     {
+        "id":6,
+        "name":"Aland Islands",
+        "code":"AX",
+        "population":28874,
+        "flag":"https://flagcdn.com/w320/ax.png",
+        "region":"Europe",
+        "capital":"Mariehamn"
+    },
+     {
+        "id":7,
+        "name":"Albania",
+        "code":"AL",
+        "population":2877797,
+        "flag":"https://flagcdn.com/w320/al.png",
+        "region":"Europe",
+        "capital":"Tirana"
+    },
+     {
+        "id":8,
+        "name":"algeria",
+        "code":"DZ",
+        "population":43851044,
+        "flag":"https://flagcdn.com/w320/dz.png",
+        "region":"Africa",
+        "capital":"Algiers"
+    },
+     {
+        "id":9,
+        "name":"India",
+        "code":"IN",
+        "population":1380004385,
+        "flag":"https://flagcdn.com/w320/in.png",
+        "region":"Asia",
+        "capital":"New Delhi"
+    }
+
+]
