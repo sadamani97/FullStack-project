@@ -1,84 +1,155 @@
 [
-    {
-        "id":1,
-        "name":"Germany",
-        "code":"DE",
-        "population":83783942,
-        "flag":"https://flagcdn.com/w320/de.png",
-        "region":"Europe",
-        "capital":"Berlin"
-    },
-    {
-        "id":2,
-        "name":"United States of America",
-        "code":"US",
-        "population":331002651,
-        "flag":"https://flagcdn.com/w320/us.png",
-        "region":"Americas",
-        "capital":"Washington, D.C."
-    },
-     {
-        "id":3,
-        "name":"Brazil",
-        "code":"BR",
-        "population":212559417,
-        "flag":"https://flagcdn.com/w320/br.png",
-        "region":"Americas",
-        "capital":"Brasília"
-    },
-     {
-        "id":4,
-        "name":"Iceland",
-        "code":"IS",
-        "population":341075,
-        "flag":"https://flagcdn.com/w320/is.png",
-        "region":"Europe",
-        "capital":"Reykjavik"
-    },
-     {
-        "id":5,
-        "name":"afghanistan",
-        "code":"AF",
-        "population":38928346,
-        "flag":"https://flagcdn.com/w320/af.png",
-        "region":"Asia",
-        "capital":"Kabul"
-    },
-     {
-        "id":6,
-        "name":"Aland Islands",
-        "code":"AX",
-        "population":28874,
-        "flag":"https://flagcdn.com/w320/ax.png",
-        "region":"Europe",
-        "capital":"Mariehamn"
-    },
-     {
-        "id":7,
-        "name":"Albania",
-        "code":"AL",
-        "population":2877797,
-        "flag":"https://flagcdn.com/w320/al.png",
-        "region":"Europe",
-        "capital":"Tirana"
-    },
-     {
-        "id":8,
-        "name":"algeria",
-        "code":"DZ",
-        "population":43851044,
-        "flag":"https://flagcdn.com/w320/dz.png",
-        "region":"Africa",
-        "capital":"Algiers"
-    },
-     {
-        "id":9,
-        "name":"India",
-        "code":"IN",
-        "population":1380004385,
-        "flag":"https://flagcdn.com/w320/in.png",
-        "region":"Asia",
-        "capital":"New Delhi"
-    }
-
+  {
+    "id": 1,
+    "name": "Germany",
+    "code": "DE",
+    "population": 83783942,
+    "flag": "https://flagcdn.com/w320/de.png",
+    "region": "Europe",
+    "capital": "Berlin",
+    "states": [
+      { "name": "Bavaria", "population": 13000000 },
+      { "name": "Baden-Württemberg", "population": 11000000 },
+      { "name": "North Rhine-Westphalia", "population": 17900000 },
+      { "name": "Berlin", "population": 3600000 }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "USA",
+    "code": "US",
+    "population": 331002651,
+    "flag": "https://flagcdn.com/w320/us.png",
+    "region": "Americas",
+    "capital": "Washington, D.C.",
+    "states": [
+      { "name": "California", "population": 39500000 },
+      { "name": "Texas", "population": 29000000 },
+      { "name": "Florida", "population": 21500000 },
+      { "name": "New York", "population": 19500000 }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Brazil",
+    "code": "BR",
+    "population": 212559417,
+    "flag": "https://flagcdn.com/w320/br.png",
+    "region": "Americas",
+    "capital": "Brasília",
+    "states": [
+    { "name": "São Paulo", "population": 46000000 },
+    { "name": "Minas Gerais", "population": 21000000 },
+    { "name": "Rio de Janeiro", "population": 17000000 },
+    { "name": "Bahia", "population": 15000000 },
+    { "name": "Paraná", "population": 11500000 },
+    { "name": "Rio Grande do Sul", "population": 11300000 },
+    { "name": "Pernambuco", "population": 9600000 },
+    { "name": "Other States", "population": 74659417 }
+  ]
+  },
+  {
+    "id": 4,
+    "name": "Iceland",
+    "code": "IS",
+    "population": 341075,
+    "flag": "https://flagcdn.com/w320/is.png",
+    "region": "Europe",
+    "capital": "Reykjavik",
+    "states": [
+    { "name": "Capital Region", "population": 230000 },
+    { "name": "Southern Peninsula", "population": 30000 },
+    { "name": "Westfjords", "population": 7000 },
+    { "name": "North Iceland", "population": 30000 },
+    { "name": "East Iceland", "population": 15000 },
+    { "name": "South Iceland", "population": 29075 }
+  ]
+  },
+  {
+    "id": 5,
+    "name": "afghanistan",
+    "code": "AF",
+    "population": 38928346,
+    "flag": "https://flagcdn.com/w320/af.png",
+    "region": "Asia",
+    "capital": "Kabul",
+    "states": [
+    { "name": "Kabul", "population": 4600000 },
+    { "name": "Herat", "population": 2000000 },
+    { "name": "Kandahar", "population": 1700000 },
+    { "name": "Balkh", "population": 1400000 },
+    { "name": "Nangarhar", "population": 1600000 },
+    { "name": "Kunduz", "population": 1000000 },
+    { "name": "Helmand", "population": 1500000 },
+    { "name": "Other Provinces", "population": 23128346 }
+  ]
+  },
+  {
+    "id": 6,
+    "name": "Aland Islands",
+    "code": "AX",
+    "population": 28874,
+    "flag": "https://flagcdn.com/w320/ax.png",
+    "region": "Europe",
+    "capital": "Mariehamn",
+    "states": [
+    { "name": "Mariehamn", "population": 11700 },
+    { "name": "Jomala", "population": 5200 },
+    { "name": "Finström", "population": 2600 },
+    { "name": "Other Municipalities", "population": 9374 }
+  ]
+  },
+  {
+    "id": 7,
+    "name": "Albania",
+    "code": "AL",
+    "population": 2877797,
+    "flag": "https://flagcdn.com/w320/al.png",
+    "region": "Europe",
+    "capital": "Tirana",
+     "states": [
+    { "name": "Tirana", "population": 800000 },
+    { "name": "Durrës", "population": 290000 },
+    { "name": "Fier", "population": 300000 },
+    { "name": "Elbasan", "population": 280000 },
+    { "name": "Shkodër", "population": 200000 },
+    { "name": "Vlorë", "population": 190000 },
+    { "name": "Korçë", "population": 210000 },
+    { "name": "Other Regions", "population": 607797 }
+  ]
+  },
+  {
+    "id": 8,
+    "name": "algeria",
+    "code": "DZ",
+    "population": 43851044,
+    "flag": "https://flagcdn.com/w320/dz.png",
+    "region": "Africa",
+    "capital": "Algiers",
+    "states": [
+      { "name": "Algiers", "population": 3415811 },
+      { "name": "Oran", "population": 1600000 },
+      { "name": "Constantine", "population": 943000 },
+      { "name": "Blida", "population": 1160000 },
+      { "name": "Batna", "population": 1200000 },
+      { "name": "Tizi Ouzou", "population": 1100000 },
+      { "name": "Sétif", "population": 1500000 },
+      { "name": "Annaba", "population": 640000 }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "India",
+    "code": "IN",
+    "population": 1380004385,
+    "flag": "https://flagcdn.com/w320/in.png",
+    "region": "Asia",
+    "capital": "New Delhi",
+    "states": [
+      { "name": "Uttar Pradesh", "population": 240000000 },
+      { "name": "Maharashtra", "population": 124000000 },
+      { "name": "Bihar", "population": 104000000 },
+      { "name": "Tamil Nadu", "population": 72000000 }
+    ]
+  }
 ]
