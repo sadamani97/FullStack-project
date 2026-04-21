@@ -6,6 +6,7 @@ import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard'
 import CountryDetails from "./pages/countries"
 import Weather from './pages/weather'
+import Profile from './pages/profile'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/weather" element={<Weather />} />
       <Route path='/country/:name' element= {<CountryDetails />}/>
+      <Route path='/profile' element={<Profile/>} />
     </Routes>
       
     </BrowserRouter>

@@ -5,10 +5,13 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from "../redux/authSlice";  
 import API from "../services/api";
+import { useState } from "react";
 
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [serverError, setServerError] = useState("");
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -20,6 +23,7 @@ const Login = () => {
         }),
 
         onSubmit: async (values) => {
+            setServerError("");
             try {
                 const res = await API.post("/api/auth/login", values);
                 
@@ -29,8 +33,10 @@ const Login = () => {
 
             } catch (error) {
                 console.log(error);
-                }
-    }
+                const errorMsg = error.response?.data?.message || "Login failed. Please try again.";
+                setServerError(errorMsg);
+            }
+        }
     });
 
     return (
@@ -38,6 +44,9 @@ const Login = () => {
             
             <form className="form-box" onSubmit={formik.handleSubmit}>
                 <h2>Login Page</h2>
+                
+                {serverError && <div style={{ color: "red", marginBottom: "10px" }}>{serverError}</div>}
+                
                 <div>
                     <label htmlFor="email">Email</label>
                     <input

@@ -10,9 +10,13 @@ export const signup = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
         const existingUser = await User.findOne({ where: { email } });
         if (existingUser) {
-            return res.status(400).json({ message: "User already exists" });
+            return res.status(400).json({ message: "User already exists with this email" });
         }
         const hash = await bcrypt.hash(password, 10);
 
@@ -21,7 +25,15 @@ export const signup = async (req, res) => {
             email,
             password: hash
         })
-        res.json(user);
+        
+        res.status(201).json({ 
+            message: "User registered successfully",
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }
+        });
 
     } catch (error) {
         console.error(error);

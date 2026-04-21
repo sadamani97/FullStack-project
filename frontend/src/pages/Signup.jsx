@@ -2,9 +2,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Signup = () => {
     const navigate = useNavigate();
+    const [serverError, setServerError] = useState("");
+    const [successMsg, setSuccessMsg] = useState("");
+
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -17,15 +21,20 @@ const Signup = () => {
             password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required")
         }),
         onSubmit: async (values) => {
-            try{
+            try {
+                setServerError("");
+                setSuccessMsg("");
                 const res = await API.post("/api/auth/signup", values);
                 console.log("user Registered", res.data);
-                alert("Signup successful! Please log in.");
-                navigate("/"); // Redirect to login page after successful signup
+                setSuccessMsg("Signup successful! Redirecting to login...");
+                setTimeout(() => {
+                    navigate("/"); // Redirect to login page after successful signup
+                }, 1500);
             } catch (error) {
                 console.log(error);
+                const errorMsg = error.response?.data?.message || "Signup failed. Please try again.";
+                setServerError(errorMsg);
             }
-            console.log(values); // Handle signup submission
         }
     });
 
@@ -33,6 +42,10 @@ const Signup = () => {
         <div className="container">
             <form className="form-box" onSubmit={formik.handleSubmit}>
                 <h2>Signup Page</h2>
+                
+                {serverError && <div style={{ color: "red", marginBottom: "10px" }}>{serverError}</div>}
+                {successMsg && <div style={{ color: "green", marginBottom: "10px" }}>{successMsg}</div>}
+                
                 <div>
                     <label htmlFor="name">Name</label>
                     <input

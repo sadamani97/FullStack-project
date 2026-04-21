@@ -2,30 +2,36 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import sequelize from "./config/db.js";
+import profileRoutes from "./routes/profile.routes.js"
+import countryRoutes from "./routes/country.routse.js"
 
 
 const app = express();
 
+app.use(express.json({limit:"10mb"}))
+app.use(express.urlencoded({limit:"10mb", extended:true}))
+
 app.use(cors({
     origin: "http://localhost:5173",
-    Credentials: true
+    credentials: true
 }));
-app.use(express.json());
+
+app.use("/api/auth", authRoutes);
+app.use("/api/profile",profileRoutes);
+app.use("/api/countries",countryRoutes);
 
 const PORT = 5000;
 
-app.get("/", (req, res) => {
-    res.send("Hello World");
-});
+
 console.log("Registering auth routes...");
-app.use("/api/auth", authRoutes);
+
+
 
 app.use((req, res) => {
     console.log("404 HIT:", req.method, req.url); // tells you exactly what URL is being hit
     res.status(404).json({ message: `Route not found: ${req.method} ${req.url}` });
 });
 
-app.use("/api/auth", authRoutes);
 
 sequelize.sync({ alter: true }).then(() => {
     console.log("Database synced");
