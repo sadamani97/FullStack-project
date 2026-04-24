@@ -1,0 +1,1724 @@
+/* ========== RESET & BASE ========== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #fafafa;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+/* ========== AUTH FORMS (Login / Signup) ========== */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-box {
+  background-color: rgba(203, 166, 166, 0.8);
+  padding: 40px;               /* ✅ was 100px — caused overflow with fixed height */
+  width: 400px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* ✅ removed fixed height: 400px — let content size it naturally */
+}
+
+.form-box h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-box label {
+  display: flex;
+  margin-bottom: 5px;
+  color: #0e0a0a;
+}
+
+.form-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-box button {
+  width: 100%;             /* ✅ was 105% — overflowed the card */
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-box button:hover {
+  background-color: #0056b3;
+}
+
+.form-box p {
+  margin-top: 20px;
+  color: #0e0202;
+}
+
+.form-box a {
+  color: #6710b3;
+  text-decoration: none;
+}
+
+.form-box a:hover {
+  text-decoration: underline;
+}
+
+/* ========== FORM ERROR & SUCCESS ========== */
+.form-error {
+  color: #c0392b;
+  background-color: #ffebee;
+  border: 1px solid #f5c6c6;
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.form-success {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+/* ========== LAYOUT ========== */
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background-color: #f0f0f5;
+  border-right: 0.5px solid #e0ddd5;
+  display: flex;
+  flex-direction: column;
+  /* ✅ removed position: fixed — use flex layout instead so main auto-offsets */
+  height: 100vh;
+  padding: 20px 0;
+  flex-shrink: 0;
+}
+
+.sidebar h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  border-bottom: 0.5px solid #e0ddd5;
+  padding: 0 18px 16px;
+}
+
+.sidebar-list {
+  flex: 1;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-list p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-list p:hover {
+  background: #fff;
+  color: #111;
+}
+
+.logout-btn {
+  margin: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: 0.5px solid #e0ddd5;
+  cursor: pointer;
+  font-size: 14px;
+  color: #888;
+  text-align: left;
+  width: calc(100% - 20px);
+  transition: background 0.15s, color 0.15s;
+}
+
+.logout-btn:hover {
+  background: #fef2f2;
+  color: #c0392b;
+  border-color: #f5c6c6;
+}
+
+/* ========== MAIN AREA ========== */
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+  min-width: 0;
+  /* ✅ removed margin-left: 220px — flex layout handles spacing automatically */
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-shrink: 0;
+  /* ✅ removed margin-left: 40px — was breaking full-width sticky bar */
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-left img {
+  width: 40px;
+  height: 40px;
+}
+
+.nav-center input {
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: 280px;
+  font-size: 14px;
+  outline: none;
+  background: #f9f9f9;
+}
+
+.nav-right .profile {
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.profile-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-menu {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  border-radius: 10px;
+  width: 150px;
+  z-index: 100;
+  background: #fff;              /* ✅ was #0056b3 (dark blue) — text was unreadable */
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.profile-menu p {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+  border-radius: 6px;
+}
+
+.profile-menu p:hover {
+  background: #f5f5f5;
+}
+
+/* ========== PAGE CONTENT ========== */
+.page-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+  /* ✅ removed margin-left: 40px — sidebar flex handles offset */
+}
+
+.ds-container {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+  /* ✅ removed margin-left: 40px */
+}
+
+/* ========== FILTER BAR ========== */
+.filter {
+  display: flex;
+  justify-content: flex-end;   /* ✅ replaced hardcoded margin-left: 1000px */
+  margin-bottom: 16px;
+}
+
+.filter select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.filter-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0 16px;
+  /* ✅ removed margin-top: -80px — caused overlap */
+}
+
+.filter-bar select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ========== COUNTRY GRID ========== */
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.country-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.country-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.country-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.country-info {
+  padding: 12px 14px;
+  color: #1a1a1a;
+}
+
+.country-info h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.country-info p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+/* ========== COUNTRY DETAILS PAGE ========== */
+.details-page {
+  padding: 32px 40px;
+  /* ✅ removed position: fixed — was clipping content and blocking scroll */
+  min-height: 100vh;
+  background: #fafafa;
+}
+
+.back-btn {
+  padding: 9px 18px;
+  margin-bottom: 24px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.details-container {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  flex-wrap: wrap;   /* ✅ wraps on smaller screens */
+  justify-content: center;
+}
+
+.flag-section img {
+  width: 100%;
+  max-width: 380px;  /* ✅ was fixed 500px — overflowed on smaller screens */
+  border-radius: 8px;
+}
+
+.info-section {
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.weather-box {
+  margin-top: 20px;
+  padding: 16px;
+  background: #fff3f0;
+  border: 1px solid #f5c6b8;
+  border-radius: 8px;
+}
+
+.chart {
+  background: #f5f5f5;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+}
+
+.chart:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* ========== ENLARGED PIE CHART SECTION ========== */
+.chart-container {
+  background: white;
+  padding: 32px 24px;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  min-width: 650px;
+}
+
+.chart-container h3 {
+  text-align: center;
+  color: #1a1a1a;
+  margin: 0 0 24px;
+  font-size: 18px;
+}
+
+.chart-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.chart-wrapper svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========== WEATHER PAGE ========== */
+.weather-upt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.weather-upt input {
+  height: 36px;
+  width: 260px;
+  padding: 0 12px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.weather-upt button {
+  height: 36px;
+  width: 80px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.weather-upt button:hover {
+  background-color: #0056b3;
+}
+
+.weather-upt button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* ========== ENHANCED WEATHER PAGE ========== */
+.weather-page-container {
+  padding: 24px;
+}
+
+.weather-page-container h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+}
+
+.weather-page-container h3 {
+  font-size: 18px;
+  margin: 24px 0 12px;
+  color: #333;
+}
+
+.weather-input-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  margin-bottom: 24px;
+}
+
+.weather-input-section h3 {
+  margin: 0 0 12px;
+}
+
+/* ========== WEATHER CARDS (CUSTOM) ========== */
+.weather-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.weather-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  color: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.weather-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.weather-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.weather-card-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.temp-badge {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.weather-card-body {
+  padding: 16px;
+}
+
+.weather-card-body p {
+  margin: 8px 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.weather-card-body .condition {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.weather-card-body .description {
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.weather-date {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-top: 8px !important;
+}
+
+.weather-card-footer {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.weather-card-footer button {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.weather-card-footer .update-btn {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.weather-card-footer .update-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.weather-card-footer .delete-btn {
+  background: rgba(255, 69, 0, 0.3);
+  color: white;
+}
+
+.weather-card-footer .delete-btn:hover {
+  background: rgba(255, 69, 0, 0.5);
+}
+
+/* ========== WEATHER SECTION ========== */
+.weather-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  margin-bottom: 24px;
+}
+
+.weather-section h3 {
+  margin: 0 0 16px;
+  color: #1a1a1a;
+}
+
+/* ========== DATABASE COUNTRIES WEATHER ========== */
+.db-weather-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+}
+
+.db-weather-section h3 {
+  margin: 0 0 16px;
+  color: #1a1a1a;
+}
+
+.db-countries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.db-country-card {
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.db-country-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.db-flag {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+}
+
+.db-flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.db-info {
+  padding: 12px;
+}
+
+.db-info h4 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: #1a1a1a;
+}
+
+.db-info p {
+  margin: 4px 0;
+  font-size: 12px;
+  color: #666;
+}
+
+/* ========== WEATHER CARDS (OLD STYLE) ========== */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.card {
+  background: #1d7a5f;
+  border: none;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 0;
+  width: 220px;
+  text-align: center;
+  color: #fff;
+}
+
+.card button.kbtn {
+  padding: 6px 12px;
+  background-color: rgba(255,255,255,0.2);
+  color: #fff;
+  width: auto;
+  margin: 6px 3px 0;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.card button.kbtn:hover {
+  background-color: rgba(255,255,255,0.35);
+}
+
+/* ========== PROFILE PAGE ========== */
+.profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+.profile-card {
+  background: white;
+  padding: 32px 28px;
+  border-radius: 15px;
+  text-align: center;
+  width: 320px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.profile-pic-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 16px;
+}
+
+.profile-img-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e8e8e8;
+}
+
+.profile-edit-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid #fff;
+  background: #007BFF;
+  color: white;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-edit-btn:hover {
+  background-color: #0056b3;
+}
+
+.profile-input {
+  width: 90%;
+  padding: 9px 12px;
+  margin: 6px auto;
+  border-radius: 7px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  display: block;
+}
+
+.profile-button-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn-profile-save {
+  flex: 1;
+  margin: 6px;
+  padding: 9px 16px;
+  border-radius: 7px;
+  border: none;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btn-profile-save:hover {
+  background: #0056b3;
+}
+
+.btn-profile-cancel {
+  flex: 1;
+  margin: 6px;
+  padding: 9px 16px;
+  border-radius: 7px;
+  border: none;
+  background: #6c757d;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btn-profile-cancel:hover {
+  background: #5a6268;
+}
+
+.btn-edit-profile {
+  margin: 6px;
+  padding: 9px 16px;
+  border-radius: 7px;
+  border: none;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btn-edit-profile:hover {
+  background: #0056b3;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 1024px) {
+  .details-container {
+    gap: 32px;
+  }
+
+  .chart-container {
+    min-width: 100%;
+  }
+
+  .chart-wrapper {
+    overflow-x: auto;
+  }
+
+  .modal {
+    min-width: 90%;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    min-width: 100%;
+    padding: 20px 16px;
+  }
+
+  .weather-card-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .details-page {
+    padding: 20px 16px;
+  }
+
+  .details-container {
+    gap: 24px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flag-section img {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .info-section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .weather-upt {
+    flex-direction: column;
+  }
+
+  .weather-upt input {
+    width: 100%;
+  }
+
+  .weather-upt button {
+    width: 100%;
+  }
+
+  .db-countries-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .modal {
+    min-width: 90%;
+    max-width: 100%;
+  }
+
+  .state-input-group {
+    flex-direction: column;
+  }
+
+  .state-name-input,
+  .state-population-input {
+    flex: 1 !important;
+    width: 100%;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .btn-add-country {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    min-width: 100%;
+    padding: 16px 12px;
+  }
+
+  .weather-card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    min-width: 95%;
+    max-width: 100%;
+    padding: 20px 16px;
+  }
+
+  .country-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-page {
+    padding: 16px 12px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+  }
+
+  .btn-save,
+  .btn-cancel {
+    width: 100%;
+  }
+
+  .state-item {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #e8e8e8;
+}
+
+/* ========== DASHBOARD HEADER ========== */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.dashboard-header h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #1a1a1a;
+}
+
+.btn-add-country {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-add-country:hover {
+  background-color: #0056b3;
+}
+
+/* ========== ERROR MESSAGE ========== */
+.error-message {
+  color: #c0392b;
+  background-color: #ffebee;
+  border: 1px solid #f5c6c6;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.modal-error {
+  color: #c0392b;
+  background-color: #ffebee;
+  border: 1px solid #f5c6c6;
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+/* ========== COUNTRY CARD BUTTONS ========== */
+.country-card-buttons {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.states-count {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #555;
+  padding: 6px;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* ========== MODAL (Add/Edit Country) ========== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal {
+  background: #fff;
+  padding: 28px 24px;
+  border-radius: 12px;
+  min-width: 420px;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+.modal h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.modal h4 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  padding: 9px 12px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-size: 14px;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* ========== STATE INPUT GROUP ========== */
+.state-input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.state-name-input {
+  flex: 2;
+}
+
+.state-population-input {
+  flex: 1;
+}
+
+.btn-add-state {
+  padding: 9px 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.btn-add-state:hover {
+  background-color: #218838;
+}
+
+/* ========== STATES LIST ========== */
+.states-list {
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+  margin-bottom: 12px;
+}
+
+.states-label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.state-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.state-item:last-child {
+  margin-bottom: 0;
+}
+
+.state-item span {
+  color: #333;
+  font-weight: 500;
+}
+
+.btn-remove-state {
+  background: #dc3545;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.2s;
+}
+
+.btn-remove-state:hover {
+  background: #c82333;
+}
+
+/* ========== MODAL BUTTONS ========== */
+.modal-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.btn-save {
+  flex: 1;
+  padding: 10px 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btn-save:hover {
+  background-color: #0056b3;
+}
+
+.btn-cancel {
+  flex: 1;
+  padding: 10px 16px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+  background-color: #5a6268;
+}
+
+/* ========== DASHBOARD INPUTS & BUTTONS ========== */
+.ds-container input {
+  padding: 7px 12px;
+  height: 34px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.ds-container button {
+  height: 34px;
+  padding: 0 16px;
+  border-radius: 8px;
+  color: #fff;
+  background-color: #0056b3;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ds-container button:hover {
+  background-color: #004494;
+}
+
+
+
+
+/* body {
+  background: #fafafa;
+  font-family: 'Segoe UI', sans-serif;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-box{
+  background-color: rgba(203, 166, 166, 0.8);
+  padding: 100px;
+  height: 400px;
+  width: 400px;
+  text-align: center;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
+}
+.form-box h2{
+  margin-bottom: 20px;
+  color: #333;
+}
+.form-box label{
+  display: flex;
+  margin-bottom: 5px;
+  color: #0e0a0a;
+}
+.form-box input{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.form-box button{
+  width: 105%;
+  padding: 10px; 
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.form-box button:hover{
+  background-color: #0056b3;
+} 
+.form-box p{
+  margin-top: 20px;
+  color: #0e0202;
+}
+.form-box a{
+  color: #6710b3;
+  text-decoration: none;
+}
+.form-box a:hover{
+  text-decoration: underline;
+}
+.ds-container{
+ padding: 20px;
+ overflow-y: auto;
+ flex: 1;
+ margin-left: 40px;
+}
+.page-content{
+  padding: 20px;
+ overflow-y: auto;
+ flex: 1;
+ margin-left: 40px;
+}
+.sidebar{
+  width: 220px;
+  min-width: 220px;
+  background-color: #b6b6cd;
+  border-right: 0.5px solid #e0ddd5;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  padding: 20px 0;
+  height: 100vh;
+ 
+}
+.sidebar-list{
+  flex: 1;
+  padding:12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-list p{
+ display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+  transition: background 0.15s, color 0.15s; 
+}
+.sidebar-list p:hover {
+  background: #fff;
+  color: #111;
+}
+
+.sidebar h2{
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+  border-bottom: 0.5px solid #e0ddd5;
+  padding: 0 18px 20px;
+}
+.logout-btn {
+  margin: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: 0.5px solid #e0ddd5;
+  cursor: pointer;
+  font-size: 14px;
+  color: #888;
+  text-align: left;
+  width: calc(100% - 20px);
+  transition: background 0.15s, color 0.15s;
+}
+
+.logout-btn:hover {
+  background: #fef2f2;
+  color: #c0392b;
+  border-color: #f5c6c6;
+}
+.main{
+  display: flex;
+  flex-direction: column; 
+  margin-left: 220px;
+  height: 100vh;
+  width: calc(100% - 220px);
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background:#9a6060;
+  top: 0;
+  z-index: 10;
+  margin-left:40px;
+}
+.nav-left{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+}
+.nav-left img{
+  width: 45px;
+  height: 45px;
+}
+.nav-center input{
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+ width: 300px;
+}
+.nav-right .profile{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.profile-container{
+  position: relative;
+  cursor: pointer;
+}
+.profile-menu{
+  position: absolute;
+  top: 50px;
+  right: 0;
+  border-radius: 10px;
+  width: 150px;
+  z-index: 100;
+  background: #0056b3;
+}
+.profile-menu p,
+.upload-btn {
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.profile-menu p:hover,
+.upload-btn:hover {
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+.upload-btn{
+  display: block;
+}
+.profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f4f6f9;
+}
+
+.profile-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.profile-card input {
+  width: 90%;
+  padding: 8px;
+  margin: 6px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.profile-card button {
+  margin: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+.profile-image-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.profile-image-wrapper:hover::after {
+  content: "Change";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.upload-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #007bff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filter{
+  display: flex;
+  margin-left: 1000px;
+}
+.country-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 250px));
+  gap: 40px;
+  margin-top: 20px;
+  justify-content: start;
+}
+.country-card{
+  background:  #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;  
+}
+.country-card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.country-card img{
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+.country-info{
+  padding: 10px;
+  margin-left: 30px;
+  color: rgb(4, 3, 3);
+}
+.country-info h3{
+  margin: 0 0 10px;
+}
+.country-info p{
+  margin: 5px 0;
+}
+.details-page {
+  padding: 80px;
+  position: fixed;
+  background: #fafafa;
+  height: 100vh;
+}
+
+.back-btn {
+  padding: 10px 20px;
+  margin-bottom: 30px;
+  border: none;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.details-container {
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+
+.flag-section img {
+  width: 500px; 
+}
+
+
+.info-section {
+  max-width: 300px;
+}
+
+.weather-box {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgb(181, 93, 93);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.chart{
+  background: rgb(229, 223, 223);
+  padding: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+.chart:hover{
+  background:rgb(229, 223, 223);
+  transform: translateY(-5px);
+}
+
+.filter-bar{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  justify-content: end;
+  margin-right: 100px;
+  margin-top: -80px;
+}
+.filter-bar select{
+  padding: 12px;
+  border-radius: 8px;
+  border:none;
+  cursor: pointer;
+
+}
+.weather-upt{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:10px
+
+}
+.weather-upt input {
+  margin-bottom: 10px;
+  height: 25px;
+  width: 250px;
+  border-radius: 5px;
+}
+.weather-upt button{
+  background-color: #007BFF;
+  margin-bottom: 10px;
+  height: 25px;
+  width:80px ;
+  border-radius: 5px;
+}
+.weather-upt button:hover{
+  cursor: pointer;
+
+}
+.ds-container input{
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+}
+.ds-container button{
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  color: #ccc;
+  background-color: #0056b3;
+  cursor: pointer;
+}
+.card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: none;
+}
+.card {
+  background:linear-gradient(135deg, #2c9431, #0c6d72);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter:blur(10px); 
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+}
+.card button{
+  padding: 10px; 
+  background-color: #007BFF;
+  color: white;
+  width: 60px;
+  margin: 6px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+} */
