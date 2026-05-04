@@ -3,16 +3,10 @@ pipeline {
 
     stages {
 
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/sadamani97/FullStack-project.git'
-            }
-        }
-
         stage('Install Backend') {
             steps {
                 dir('backend') {
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
@@ -20,7 +14,7 @@ pipeline {
         stage('Install Frontend') {
             steps {
                 dir('frontend') {
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
@@ -28,7 +22,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir('frontend') {
-                    sh 'npm run build'
+                    bat 'npm run build'
                 }
             }
         }
@@ -36,7 +30,7 @@ pipeline {
         stage('Run Backend') {
             steps {
                 dir('backend') {
-                    sh 'npm start'
+                    bat 'npm start'
                 }
             }
         }
