@@ -12,7 +12,7 @@ RUN npm run build
 FROM node:18-alpine
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --omit=dev
 COPY --from=builder /app/dist ./dist
 EXPOSE 5000
-CMD ["node", "start"]
+CMD ["node", "dist/server.js"]
