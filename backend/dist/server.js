@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 import sequelize from "./config/db.js";
 import profileRoutes from "./routes/profile.routes.js";
@@ -8,6 +9,7 @@ import weatherRoutes from "./routes/weather.routes.js";
 import "./models/weather.model.js";
 import "./models/contry.model.js";
 import "./models/user.model.js";
+dotenv.config();
 const app = express();
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
@@ -19,7 +21,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/countries", countryRoutes);
 app.use("/api/weather", weatherRoutes);
-const PORT = 5000;
+// port
+const PORT = process.env.PORT || 5000;
 console.log("Registering auth routes...");
 app.use((req, res) => {
     console.log("404 HIT:", req.method, req.url);
