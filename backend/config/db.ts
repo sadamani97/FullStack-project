@@ -13,6 +13,9 @@ const sequelize = new Sequelize(
   port: Number(process.env.DB_PORT),
   dialect: "mysql",
   logging: false,
+  retry: {
+    max: 5
+  }
 });
 
 export default sequelize;
