@@ -15,7 +15,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql   # persist DB data between restarts
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pyour_secure_password_here"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -57,4 +57,4 @@ frontend:
       
 volumes:
   mysql_data:
-  driver: local
+  
