@@ -1,5 +1,9 @@
 import express from "express";
 import cors from "cors";
+import { fileURLToPath } from "url";
+import path from "path";
+
+
 import authRoutes from "./routes/auth.routes.js";
 import sequelize from "./config/db.js";
 import profileRoutes from "./routes/profile.routes.js";
@@ -10,6 +14,9 @@ import "./models/contry.model.js";
 import "./models/user.model.js";
 
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
@@ -25,6 +32,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/countries", countryRoutes);
 app.use("/api/weather", weatherRoutes);
+
+const frontendPath = path.join(__dirname, "../../frontend/dist");
+app.use(express.static(frontendPath));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
 
 const PORT = 5000;
 
