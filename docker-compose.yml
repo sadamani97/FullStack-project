@@ -1,0 +1,60 @@
+version: "3.8"
+
+
+services:
+
+   mysql:
+    image: mysql:8
+    container_name: fullstack_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fullstackdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql   # persist DB data between restarts
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pyour_secure_password_here"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+ 
+ 
+ 
+   backend:
+    build:
+      context: ./backend        # path to backend folder
+      dockerfile: Dockerfile
+    container_name: fullstack_backend
+    restart: on-failure
+    ports:
+      - "5000:5000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: fullstackdb
+      JWT_SECRET: 91519c01c936b1da1e8bf7388c780246c65ac54b410395159fcd74ec6df11a47
+      NODE_ENV: production
+      PORT: 5000
+  
+frontend:
+    build:
+      context: ./frontend       # path to frontend folder
+      dockerfile: Dockerfile
+    container_name: fullstack_frontend
+    restart: on-failure
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+      
+volumes:
+  mysql_data:
+  driver: local
