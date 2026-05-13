@@ -23,7 +23,7 @@ services:
   backend:
     build: ./backend
     container_name: fullstack_backend
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - "5000:5000"
     depends_on:
@@ -39,14 +39,23 @@ services:
       NODE_ENV: production
       PORT: 5000
 
+    networks:
+      - fullstack-network
+
   frontend:
     build: ./frontend
     container_name: fullstack_frontend
-    restart: on-failure
+    restart: unless-stopped
     ports:
-      - "80:80"
+      - "3000:80"
     depends_on:
       - backend
+    networks:
+      - fullstack-network
 
 volumes:
   mysql_data:
+
+networks:
+  fullstack-network:
+    driver: bridge
