@@ -4,89 +4,53 @@ pipeline {
   environment {
     // ── Replace with your Docker Hub username ──────────────────
     DOCKER_HUB     = 'sdamani97'
-    IMAGE_BACKEND  = "${DOCKER_HUB}/fullstack-backend"
-    IMAGE_FRONTEND = "${DOCKER_HUB}/fullstack-frontend"
-
     // Credential ID set in Jenkins → Manage Jenkins → Credentials
-    DOCKER_CREDS   = credentials('dockerhub-creds')
+    DOCKER_CREDS   = credentials('Country-app-weather')
     }
 stages {
 
   // ── Stage 1: Pull code from Git ───────────────────────────
-  stage('Checkout') {
+  stage('Clone Repository') {
     steps {
-      echo '==> Pulling latest code...'
-      checkout scm
+      git url: 'https://github.com/sadamani97/FullStack-project.git'
     }
     }
 
 // ── Stage 2: Build Backend (TypeScript → JS) ──────────────
-  stage('Build Backend') {
-    steps {
-      dir('backend') {
-        echo '==> Installing backend dependencies...'
-        bat 'npm install'
-        echo '==> Running TypeScript compiler...'
-        bat 'npm run build'
-      }
+  stage('Build Backend Image') {
+   steps {
+                bat 'docker build -t sdamani97/backend:v1 ./backend'
+            }
   }
-}
 
     // ── Stage 3: Build Frontend (Vite → dist/) ────────────────
 
   stage('Build Frontend') {
     steps {
-        
-      dir('frontend') {
-        echo '==> Installing frontend dependencies...'                   
-        bat 'npm install'
-        echo '==> Building frontend...'
-        bat 'npm run build'
-      }
-    }
+            bat 'docker build -t sdamani97/frontend:v1 ./frontend'
+            }
   }
 
-// ── Stage 4: Build Docker Images ─────────────────────────
-    // Tags with BUILD_NUMBER (for traceability) AND "latest"
-  stage('Build Docker Images') {
-    steps {
-      echo '==> Building backend Docker image...'
-      bat "docker build -t ${IMAGE_BACKEND}:${env.BUILD_NUMBER} -t ${IMAGE_BACKEND}:latest -f backend/Dockerfile ."            
-      echo '==> Building frontend Docker image...'
-      bat "docker build -t ${IMAGE_FRONTEND}:${env.BUILD_NUMBER} -t ${IMAGE_FRONTEND}:latest -f frontend/Dockerfile ."
-    }
-  }
 
   // ── Stage 5: Push Images to Docker Hub ───────────────────
   stage('Push to Docker Hub') {
-    steps {
-      echo '==> Logging in to Docker Hub...'
-      bat "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
-      
-      echo '==> Pushing backend image...'
-      bat "docker push ${IMAGE_BACKEND}:${env.BUILD_NUMBER}"
-      bat "docker push ${IMAGE_BACKEND}:latest"
-      
-      echo '==> Pushing frontend image...'
-      bat "docker push ${IMAGE_FRONTEND}:${env.BUILD_NUMBER}"
-      bat "docker push ${IMAGE_FRONTEND}:latest"    
-    }
+     steps {
+                bat 'docker push sdamani97/backend:v1'
+            }
   }
     // ── Stage 6: Deploy with Docker Compose ──────────────────
-    // Pulls latest images and restarts containers
-  stage('Deploy to Server') {
-    steps {
-      echo '==> Deploying to server...'
-      // Assuming you have SSH access and docker-compose.yml on the server
-      // You can use Jenkins SSH plugin or execute remote commands via SSH
-      // Example using SSH plugin:
-      sshCommand remote: [host: 'your-server-ip', user: 'your-ssh-user', identityFile: 'path-to-ssh-key'], command: '''
-          cd /path/to/your/docker-compose-directory
-          docker-compose pull
-          docker-compose up -d
-      '''
+    stage('Push Frontend Image') {
+            steps {
+                bat 'docker push sdamani97/frontend:v1'
+            }
+        }
+
+        stage('Deploy Kubernetes') {
+            steps {
+                bat 'kubectl apply -f k8s/'
+            }
+        }
     }
-  }
 }
 // ── After pipeline finishes ────────────────────────────────────
 post {
