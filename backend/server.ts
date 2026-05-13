@@ -13,6 +13,9 @@ import "./models/user.model.js";
 dotenv.config();
 
 const app = express();
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
@@ -39,9 +42,7 @@ app.use((req, res) => {
   console.log("404 HIT:", req.method, req.url);
   res.status(404).json({ message: `Route not found: ${req.method} ${req.url}` });
 });
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
-});
+
 
 sequelize.sync({ alter: true }).then(() => {
   console.log("Database synced");
