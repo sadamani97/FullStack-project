@@ -39,6 +39,9 @@ app.use((req, res) => {
   console.log("404 HIT:", req.method, req.url);
   res.status(404).json({ message: `Route not found: ${req.method} ${req.url}` });
 });
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
 
 sequelize.sync({ alter: true }).then(() => {
   console.log("Database synced");

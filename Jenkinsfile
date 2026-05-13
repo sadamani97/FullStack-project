@@ -3,7 +3,7 @@ pipeline {
 
   environment {
     // ── Replace with your Docker Hub username ──────────────────
-    DOCKER_HUB     = 'your-dockerhub-username'
+    DOCKER_HUB     = 'sdamani97'
     IMAGE_BACKEND  = "${DOCKER_HUB}/fullstack-backend"
     IMAGE_FRONTEND = "${DOCKER_HUB}/fullstack-frontend"
 
@@ -51,9 +51,9 @@ stages {
   stage('Build Docker Images') {
     steps {
       echo '==> Building backend Docker image...'
-      bat "docker build -t ${IMAGE_BACKEND}:${env.BUILD_NUMBER} -t ${IMAGE_BACKEND}:latest -f backend/dockerfile ."            
+      bat "docker build -t ${IMAGE_BACKEND}:${env.BUILD_NUMBER} -t ${IMAGE_BACKEND}:latest -f backend/Dockerfile ."            
       echo '==> Building frontend Docker image...'
-      bat "docker build -t ${IMAGE_FRONTEND}:${env.BUILD_NUMBER} -t ${IMAGE_FRONTEND}:latest -f frontend/dockerfile ."
+      bat "docker build -t ${IMAGE_FRONTEND}:${env.BUILD_NUMBER} -t ${IMAGE_FRONTEND}:latest -f frontend/Dockerfile ."
     }
   }
 
@@ -99,7 +99,7 @@ post {
   always {
     echo '🔒 Cleaning up...'
     // Optional: Logout from Docker Hub, clean workspace, etc.
-    dockerLogout()
+    docker Logout()
     }
   }
 }
