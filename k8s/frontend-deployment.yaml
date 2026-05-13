@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: sdamani97/contry-app-frontend:latest
+        image: sdamani97/frontend:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
