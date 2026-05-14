@@ -18,7 +18,6 @@ metadata:
 labels:
 app: mysql
 
-```
 spec:
   containers:
   - name: mysql
@@ -44,7 +43,7 @@ spec:
     volumeMounts:
     - name: mysql-storage
       mountPath: /var/lib/mysql
-```
+
 
 volumeClaimTemplates:
 
