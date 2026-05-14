@@ -6,6 +6,9 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     port: Number(process.env.DB_PORT),
     dialect: "mysql",
     logging: false,
+    retry: {
+        max: 5
+    }
 });
 export default sequelize;
 //# sourceMappingURL=db.js.map
